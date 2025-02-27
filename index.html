@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- InMobi Choice. Consent Manager Tag v3.0 (for TCF 2.2) -->
+<script type="text/javascript" async=true>
+(function() {
+  var host = "www.themoneytizer.com";
+  var element = document.createElement('script');
+  var firstScript = document.getElementsByTagName('script')[0];
+  var url = 'https://cmp.inmobi.com'
+    .concat('/choice/', '6Fv0cGNfc_bw8', '/', host, '/choice.js?tag_version=V3');
+  var uspTries = 0;
+  var uspTriesLimit = 3;
+  element.async = true;
+  element.type = 'text/javascript';
+  element.src = url;
+
+  firstScript.parentNode.insertBefore(element, firstScript);
+
+  function makeStub() {
+    var TCF_LOCATOR_NAME = '__tcfapiLocator';
+    var queue = [];
+    var win = window;
+    var cmpFrame;
+
+    function addFrame() {
+      var doc = win.document;
+      var otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
+
+      if (!otherCMP) {
+        if (doc.body) {
+          var iframe = doc.createElement('iframe');
+
+          iframe.style.cssText = 'display:none';
+          iframe.name = TCF_LOCATOR_NAME;
+          doc.body.appendChild(iframe);
+        } else {
+          setTimeout(addFrame, 5);
+        }
+      }
+      return !otherCMP;
+    }
+
+    function tcfAPIHandler() {
+      var gdprApplies;
+      var args = arguments;
+
+      if (!args.length) {
+        return queue;
+      } else if (args[0] === 'setGdprApplies') {
+        if (
+          args.length > 3 &&
+          args[2] === 2 &&
+          typeof args[3] === 'boolean'
+        ) {
+          gdprApplies = args[3];
+          if (typeof args[2] === 'function') {
+            args[2]('set', true);
+          }
+        }
+      } else if (args[0] === 'ping') {
+        var retr = {
+          gdprApplies: gdprApplies,
+          cmpLoaded: false,
+          cmpStatus: 'stub'
+        };
+
+        if (typeof args[2] === 'function') {
+          args[2](retr);
+        }
+      } else {
+        if(args[0] === 'init' && typeof args[3] === 'object') {
+          args[3] = Object.assign(args[3], { tag_version: 'V3' });
+        }
+        queue.push(args);
+      }
+    }
+
+    function postMessageEventHandler(event) {
+      var msgIsString = typeof event.data === 'string';
+      var json = {};
+
+      try {
+        if (msgIsString) {
+          json = JSON.parse(event.data);
+        } else {
+          json = event.data;
+        }
+      } catch (ignore) {}
+
+      var payload = json.__tcfapiCall;
+
+      if (payload) {
+        window.__tcfapi(
+          payload.command,
+          payload.version,
+          function(retValue, success) {
+            var returnMsg = {
+              __tcfapiReturn: {
+                returnValue: retValue,
+                success: success,
+                callId: payload.callId
+              }
+            };
+            if (msgIsString) {
+              returnMsg = JSON.stringify(returnMsg);
+            }
+            if (event && event.source && event.source.postMessage) {
+              event.source.postMessage(returnMsg, '*');
+            }
+          },
+          payload.parameter
+        );
+      }
+    }
+
+    while (win) {
+      try {
+        if (win.frames[TCF_LOCATOR_NAME]) {
+          cmpFrame = win;
+          break;
+        }
+      } catch (ignore) {}
+
+      if (win === window.top) {
+        break;
+      }
+      win = win.parent;
+    }
+    if (!cmpFrame) {
+      addFrame();
+      win.__tcfapi = tcfAPIHandler;
+      win.addEventListener('message', postMessageEventHandler, false);
+    }
+  };
+
+  makeStub();
+
+  var uspStubFunction = function() {
+    var arg = arguments;
+    if (typeof window.__uspapi !== uspStubFunction) {
+      setTimeout(function() {
+        if (typeof window.__uspapi !== 'undefined') {
+          window.__uspapi.apply(window.__uspapi, arg);
+        }
+      }, 500);
+    }
+  };
+
+  var checkIfUspIsReady = function() {
+    uspTries++;
+    if (window.__uspapi === uspStubFunction && uspTries < uspTriesLimit) {
+      console.warn('USP is not accessible');
+    } else {
+      clearInterval(uspInterval);
+    }
+  };
+
+  if (typeof window.__uspapi === 'undefined') {
+    window.__uspapi = uspStubFunction;
+    var uspInterval = setInterval(checkIfUspIsReady, 6000);
+  }
+})();
+</script>
+<!-- End InMobi Choice. Consent Manager Tag v3.0 (for TCF 2.2) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Labs Token Generator</title>
+    <style>
+        body {
+            background-color: #0a0a0f;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(37, 42, 64, 0.8) 0%, transparent 100%),
+                radial-gradient(circle at 20% 30%, rgba(24, 97, 148, 0.4) 0%, transparent 50%);
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.3));
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .description {
+            color: #8a9cbd;
+            margin-bottom: 2rem;
+        }
+
+        .token-box {
+            background: linear-gradient(145deg, rgba(20, 25, 40, 0.9), rgba(30, 35, 50, 0.9));
+            border: 1px solid rgba(100, 200, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+        }
+
+        .controls {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .control-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(30, 35, 50, 0.9);
+            border-radius: 24px;
+            transition: .4s;
+            border: 1px solid rgba(100, 200, 255, 0.2);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 2px;
+            background: linear-gradient(145deg, #00ffff, #0088ff);
+            border-radius: 50%;
+            transition: .4s;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        input:checked + .slider {
+            background-color: rgba(0, 255, 255, 0.2);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        .length-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 4px;
+            background: linear-gradient(90deg, #00ffff, #0088ff);
+            border-radius: 2px;
+            margin: 1rem 0;
+        }
+
+        .length-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(145deg, #00ffff, #0088ff);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .token-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .token-output {
+            width: 95%;
+            min-height: 100px;
+            background-color: rgba(20, 25, 40, 0.9);
+            border: 1px solid rgba(100, 200, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            color: #00ffff;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        button {
+            background: linear-gradient(145deg, rgba(0, 255, 255, 0.1), rgba(0, 136, 255, 0.1));
+            border: 1px solid rgba(100, 200, 255, 0.2);
+            color: #00ffff;
+            padding: 0.5rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        button:hover {
+            background: linear-gradient(145deg, rgba(0, 255, 255, 0.2), rgba(0, 136, 255, 0.2));
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .length-display {
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            font-family: 'Courier New', monospace;
+            margin-left: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .glow {
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px rgba(0, 255, 255, 0.2),
+                           0 0 10px rgba(0, 255, 255, 0.2),
+                           0 0 15px rgba(0, 255, 255, 0.2);
+            }
+            to {
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.3),
+                           0 0 20px rgba(0, 255, 255, 0.3),
+                           0 0 30px rgba(0, 255, 255, 0.3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://tokengen.app/darklabslogo1.png" alt="Dark Labs Logo" class="logo">
+        <h1>Token Generator</h1>
+        <p class="description">Generate random string with the chars you want, uppercase or lowercase letters, numbers and/or symbols.</p>
+        
+        <div class="token-box glow">
+            <div class="controls">
+                <div class="control-row">
+                    <span>Uppercase (ABC...)</span>
+                    <label class="switch">
+                        <input type="checkbox" id="uppercase" checked onchange="generateToken()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="control-row">
+                    <span>Lowercase (abc...)</span>
+                    <label class="switch">
+                        <input type="checkbox" id="lowercase" checked onchange="generateToken()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="control-row">
+                    <span>Numbers (123...)</span>
+                    <label class="switch">
+                        <input type="checkbox" id="numbers" checked onchange="generateToken()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="control-row">
+                    <span>Symbols (!-...)</span>
+                    <label class="switch">
+                        <input type="checkbox" id="symbols" onchange="generateToken()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="control-row">
+                    <div class="length-label">
+                        <span>Length</span>
+                        <span id="lengthDisplay" class="length-display">(32)</span>
+                    </div>
+                </div>
+                <input type="range" id="length" min="1" max="512" value="32" 
+                       class="length-slider" oninput="updateLength(this.value)">
+            </div>
+
+            <div class="token-wrapper">
+                <textarea id="tokenOutput" class="token-output" readonly></textarea>
+            </div>
+
+            <div class="button-row">
+                <button onclick="copyToken()">Copy</button>
+                <button onclick="generateToken()">Refresh</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+        const numbers = '0123456789';
+        const symbols = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+        function updateLength(value) {
+            document.getElementById('lengthDisplay').textContent = `(${value})`;
+            generateToken();
+        }
+
+        function generateToken() {
+            const length = parseInt(document.getElementById('length').value);
+            let charset = '';
+            
+            if (document.getElementById('uppercase').checked) charset += uppercase;
+            if (document.getElementById('lowercase').checked) charset += lowercase;
+            if (document.getElementById('numbers').checked) charset += numbers;
+            if (document.getElementById('symbols').checked) charset += symbols;
+
+            if (charset === '') {
+                document.getElementById('tokenOutput').value = 'Please select at least one character type';
+                return;
+            }
+
+            let token = '';
+            const charsetLength = charset.length;
+            const array = new Uint32Array(length);
+            crypto.getRandomValues(array);
+            
+            for (let i = 0; i < length; i++) {
+                token += charset[array[i] % charsetLength];
+            }
+
+            document.getElementById('tokenOutput').value = token;
+        }
+
+        function copyToken() {
+            const tokenOutput = document.getElementById('tokenOutput');
+            tokenOutput.select();
+            document.execCommand('copy');
+            
+            // Visual feedback
+            const originalValue = tokenOutput.value;
+            tokenOutput.value = 'Copied!';
+            setTimeout(() => {
+                tokenOutput.value = originalValue;
+            }, 1000);
+        }
+
+        // Generate initial token
+        generateToken();
+    </script>
+</body>
+</html>
