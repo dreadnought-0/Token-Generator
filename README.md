@@ -59,7 +59,7 @@ The application features a cosmic space theme with:
 No installation required! Simply download the HTML file and open it in any modern web browser.
 
 ```
-git clone https://github.com/yourusername/dark-labs-token-generator.git
+git clone https://github.com/dreadnought-0/Token-Generator.git
 cd dark-labs-token-generator
 ```
 
