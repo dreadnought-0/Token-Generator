@@ -2,7 +2,6 @@
 
 A sleek, space-themed random token generator built with pure HTML, CSS, and JavaScript. This web application allows users to generate cryptographically secure random tokens with customizable character sets and lengths.
 
-![Dark Labs Token Generator](https://wpmtester.com/darklabslogo1.png)
 
 ## Features
 
