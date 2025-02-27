@@ -79,4 +79,4 @@ MIT License - feel free to use, modify, and distribute as needed.
 ## Credits
 
 Developed by Dark Space Labs
-Logo: [Dark Labs](https://wpmtester.com/darklabslogo1.png)
+Logo: [Dark Space Labs](https://wpmtester.com/darklabslogo1.png)
